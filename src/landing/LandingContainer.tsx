@@ -1,7 +1,12 @@
 import React from "react";
+import Hero from "./Hero";
 
 const LandingContainer = () => {
-  return <div>LandingContainer</div>;
+  return (
+    <div>
+      <Hero />
+    </div>
+  );
 };
 
 export default LandingContainer;
