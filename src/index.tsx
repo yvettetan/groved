@@ -11,6 +11,7 @@ import Landing from "./landing/LandingContainer";
 import ShopContainer from "./shop/ShopContainer";
 import AboutContainer from "./about/AboutContainer";
 import BlogContainer from "./blog/BlogContainer";
+import ProductContainer from "./product/ProductContainer";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -22,7 +23,9 @@ ReactDOM.render(
           <Route path="/" element={<App />}>
             <Route path="/" element={<Landing />} />
             <Route path="about" element={<AboutContainer />} />
-            <Route path="shop" element={<ShopContainer />} />
+            <Route path="shop" element={<ShopContainer />}>
+              <Route path=":plantName" element={<ProductContainer />} />
+            </Route>
             <Route path="blog" element={<BlogContainer />} />
           </Route>
           <Route
