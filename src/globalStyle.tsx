@@ -6,23 +6,23 @@ type Props = {
 };
 
 const GlobalStyle = createGlobalStyle<Props>`
-  /** Optimal Roman **/
+  /** Optima Roman **/
   @font-face {
-    font-family: "Optimal";
+    font-family: "Optima";
     font-weight: 400;
     font-style: normal;
     src: url("/fonts/OptimaLTPro-Roman.woff2") format("woff2")
   }
-  /** Optimal Medium **/
+  /** Optima Medium **/
   @font-face {
-    font-family: "Optimal";
+    font-family: "Optima";
     font-weight: 500;
     font-style: normal;
     src: url("/fonts/OptimaLTPro-Medium.woff2") format("woff2")
   }
-  /** Optimal Bold **/
+  /** Optima Bold **/
   @font-face {
-    font-family: "Optimal";
+    font-family: "Optima";
     font-weight: 700;
     font-style: normal;
     src: url("/fonts/OptimaLTPro-Bold.woff2") format("woff2")
@@ -46,6 +46,15 @@ const GlobalStyle = createGlobalStyle<Props>`
     color: ${(props) => props.theme.color.primary};
     font-family: ${(props) => props.theme.fontFamily.default};
     font-size: ${(props) => props.theme.fontSize.default};
+  }
+
+  h1, h2, h3 {
+    font-family: ${(props) => props.theme.fontFamily.headline};
+  }
+
+  a {
+    text-decoration: none;
+    color: ${(props) => props.theme.color.primary};
   }
 `;
 

@@ -8,6 +8,7 @@ const theme: ThemeType = {
   color: {
     primary: "#1F3B2C",
     primaryLight: "#588068",
+    secondary: "#9D8A76",
     dark: "#161C10",
     light: "#FFF",
   },
