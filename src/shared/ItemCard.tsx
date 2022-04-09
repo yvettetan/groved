@@ -41,16 +41,14 @@ const ItemCard = ({
   name: string;
   scientificName: string;
   price: string;
-  size?: "small" | "medium" | "large";
+  size?: "small" | "large";
 }) => {
   const getDimensions = (size: string | undefined) => {
     switch (size) {
       case "small":
         return { width: "255px", height: "336px" };
-      case "medium":
-        return { width: "350px", height: "456px" };
       case "large":
-        return { width: "445px", height: "576px" };
+        return { width: "350px", height: "456px" };
     }
   };
 
