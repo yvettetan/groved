@@ -12,6 +12,8 @@ import ShopContainer from "./shop/ShopContainer";
 import AboutContainer from "./about/AboutContainer";
 import BlogContainer from "./blog/BlogContainer";
 import ProductContainer from "./product/ProductContainer";
+import ProductsContainer from "./product/ProductsContainer";
+import ScrollToTop from "./shared/ScrollToTop";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -19,24 +21,27 @@ ReactDOM.render(
       <Normalize />
       <GlobalStyle />
       <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<App />}>
-            <Route path="/" element={<Landing />} />
-            <Route path="about" element={<AboutContainer />} />
-            <Route path="shop" element={<ShopContainer />}>
-              <Route path=":plantName" element={<ProductContainer />} />
+        <ScrollToTop>
+          <Routes>
+            <Route path="/" element={<App />}>
+              <Route path="/" element={<Landing />} />
+              <Route path="about" element={<AboutContainer />} />
+              <Route path="shop" element={<ShopContainer />}>
+                <Route index element={<ProductsContainer />} />
+                <Route path=":plantName" element={<ProductContainer />} />
+              </Route>
+              <Route path="blog" element={<BlogContainer />} />
             </Route>
-            <Route path="blog" element={<BlogContainer />} />
-          </Route>
-          <Route
-            path="*"
-            element={
-              <main>
-                <p>There's nothing here!</p>
-              </main>
-            }
-          />
-        </Routes>
+            <Route
+              path="*"
+              element={
+                <main>
+                  <p>There's nothing here!</p>
+                </main>
+              }
+            />
+          </Routes>
+        </ScrollToTop>
       </BrowserRouter>
     </ThemeProvider>
   </React.StrictMode>,
