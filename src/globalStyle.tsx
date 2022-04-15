@@ -11,35 +11,35 @@ const GlobalStyle = createGlobalStyle<Props>`
     font-family: "Optima";
     font-weight: 400;
     font-style: normal;
-    src: url("/fonts/OptimaLTPro-Roman.woff2") format("woff2")
+    src: url("/assets/fonts/OptimaLTPro-Roman.woff2") format("woff2")
   }
   /** Optima Medium **/
   @font-face {
     font-family: "Optima";
     font-weight: 500;
     font-style: normal;
-    src: url("/fonts/OptimaLTPro-Medium.woff2") format("woff2")
+    src: url("/assets/fonts/OptimaLTPro-Medium.woff2") format("woff2")
   }
   /** Optima Bold **/
   @font-face {
     font-family: "Optima";
     font-weight: 700;
     font-style: normal;
-    src: url("/fonts/OptimaLTPro-Bold.woff2") format("woff2")
+    src: url("/assets/fonts/OptimaLTPro-Bold.woff2") format("woff2")
   }
   /* * HKGrotesk Regular * */
   @font-face {
     font-family: "HKGrotesk";
     font-weight: 400;
     font-style: normal;
-    src: url("/fonts/HKGrotesk-Regular.woff2") format("woff2")
+    src: url("/assets/fonts/HKGrotesk-Regular.woff2") format("woff2")
   }
   /* * HKGrotesk SemiBold * */
   @font-face {
     font-family: "HKGrotesk";
     font-weight: 600;
     font-style: normal;
-    src: url("/fonts/HKGrotesk-SemiBoldLegacy.woff2") format("woff2")
+    src: url("/assets/fonts/HKGrotesk-SemiBoldLegacy.woff2") format("woff2")
   }
 
   body {
@@ -50,6 +50,7 @@ const GlobalStyle = createGlobalStyle<Props>`
 
   h1, h2, h3 {
     font-family: ${(props) => props.theme.fontFamily.headline};
+    text-transform: capitalize;
   }
 
   a {
