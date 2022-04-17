@@ -1,8 +1,8 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import styled from "styled-components";
 import { PlantInfo } from "../data";
-import Button from "../shared/Button";
 import theme from "../theme";
+import Button from "../shared/Button";
 
 const Container = styled.div`
   margin-bottom: 2.5rem;
@@ -62,33 +62,47 @@ const ButtonContainer = styled.div`
   }
 `;
 
+const getImagePath = (plantName: string, color: string) => {
+  return `/assets/images/plants/${plantName}/${plantName}-${color}.jpeg`;
+};
+
 const ProductInfo: React.FC<PlantInfo> = (props) => {
+  const plantName = props.name.replace(/\s/g, "-");
   const potColors = theme.potColor;
   const defaultColor = Object.keys(potColors)[0];
   const [selectedColor, setSelectedColor] = useState(defaultColor);
+  const [imageSrc, setImageSrc] = useState(
+    getImagePath(plantName, selectedColor)
+  );
 
-  const changeProductColor = (e: React.MouseEvent<HTMLElement>, i: number) => {
-    console.log(e.currentTarget.style.backgroundColor);
+  useEffect(() => {
+    setImageSrc(getImagePath(plantName, defaultColor!));
+    setSelectedColor(defaultColor);
+  }, [plantName, defaultColor]);
+
+  const changeProductColor = (e: React.MouseEvent<HTMLElement>) => {
     const color = e.currentTarget.style.backgroundColor;
-    const selectedColor = Object.keys(potColors).find(
+    const newColorName = Object.keys(potColors).find(
       (key) => potColors[key] === color
     );
-    setSelectedColor(selectedColor!);
+    setSelectedColor(newColorName!);
+    setImageSrc(getImagePath(plantName, newColorName!));
   };
 
   const colorOptions = Object.keys(potColors).map((key, i) => (
     <button
       key={i}
-      onClick={(e) => changeProductColor(e, i)}
+      onClick={(e) => changeProductColor(e)}
       className={`product-color ${key === selectedColor ? "selected" : ""}`}
       style={{
         backgroundColor: `${potColors[key]}`,
       }}
     ></button>
   ));
+
   return (
     <Container>
-      <img className="product-img" src={props.img} alt="" />
+      <img className="product-img" src={imageSrc} alt={props.name} />
       <InfoContainer>
         <div>
           <div className="product-info">
@@ -98,7 +112,7 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
                 <p className="plant-scientific-name">{props.scientificName}</p>
               )}
             </div>
-            <p className="product-price">PHP{props.price}</p>
+            <p className="product-price">PHP {props.price}</p>
           </div>
           <p>{props.description}</p>
         </div>
@@ -115,17 +129,6 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
           <Button color="primary">Add to cart</Button>
           <Button color="secondary">Buy now</Button>
         </ButtonContainer>
-        <p>PLANT INFORMATION</p>
-        <p>PLANT CARE</p>
-        <hr />
-        <p>
-          The Peperomia obtusifolia, or “baby rubber plant”, is characterized by
-          its thick spoon-shaped green leaves.
-        </p>
-        <p>
-          The Peperomia obtusifolia, or “baby rubber plant”, is characterized by
-          its thick spoon-shaped green leaves.
-        </p>
       </InfoContainer>
     </Container>
   );
