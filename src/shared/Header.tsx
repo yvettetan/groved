@@ -1,6 +1,3 @@
-import logo from "../../src/assets/images/logo.svg";
-import cart from "../../src/assets/images/shopping-cart.svg";
-import user from "../../src/assets/images/user.svg";
 import Button from "./Button";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
@@ -19,6 +16,8 @@ const Nav = styled.nav`
   justify-content: space-between;
   align-items: center;
   padding: 1rem 4rem;
+  max-width: 80rem;
+  margin: 0 auto;
 `;
 const NavBrand = styled.div`
   font-size: 1.5rem;
@@ -50,7 +49,7 @@ const Header = () => {
       <Nav>
         <NavBrand>
           <Link to="/" className="logo-container">
-            <img className="logo" src={logo} alt="logo" />
+            <img className="logo" src={"/assets/images/logo.svg"} alt="logo" />
             <span>groved</span>
           </Link>
         </NavBrand>
@@ -60,8 +59,12 @@ const Header = () => {
           <Link to="/shop">Shop</Link>
           <Button color="secondary">Log in</Button>
 
-          <img className="icon" src={user} alt="user" />
-          <img className="icon" src={cart} alt="shopping-cart" />
+          <img className="icon" src={"/assets/images/user.svg"} alt="user" />
+          <img
+            className="icon"
+            src={"/assets/images/shopping-cart.svg"}
+            alt="shopping-cart"
+          />
         </NavLinks>
       </Nav>
     </HeaderContainer>

@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../assets/images/logo-circle.svg";
 import { Formik } from "formik";
 import * as Yup from "yup";
 
@@ -53,7 +52,7 @@ const Newsletter = () => {
   return (
     <NewsletterContainer>
       <div className="newsletter">
-        <img src={logo} alt="logo" />
+        <img src={"/assets/images/logo-circle.svg"} alt="logo" />
         <strong className="greeting" style={{ display: "block" }}>
           ALOE, LET'S BE SOIL MATES!
         </strong>

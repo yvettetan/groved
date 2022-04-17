@@ -1,10 +1,9 @@
 import React from "react";
-import heroImg from "../assets/images/hero.png";
 import styled from "styled-components";
 import Button from "../shared/Button";
 
 const HeroContainer = styled.div`
-  background: url(${heroImg});
+  background: url("/assets/images/hero.png");
   background-repeat: no-repeat;
   background-size: cover;
   width: 100%;

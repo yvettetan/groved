@@ -1,6 +1,5 @@
 import React from "react";
 import styled from "styled-components";
-import logo from "../assets/images/logo-name.svg";
 
 const FooterContainer = styled.section`
   background-color: ${(props) => props.theme.color.primary};
@@ -32,7 +31,7 @@ const FooterContainer = styled.section`
 const Footer = () => {
   return (
     <FooterContainer>
-      <img className="logo" src={logo} alt="logo" />
+      <img className="logo" src={"/assets/images/logo-name.svg"} alt="logo" />
       <div className="footer-links-container">
         <div className="footer-links">
           <a href="/">Newsletter</a>
