@@ -14,6 +14,10 @@ const COLOR = {
     color: ${(props) => props.theme.color.light};
     background: ${(props) => props.theme.color.primary};
     border: 1px solid ${(props) => props.theme.color.primary};
+    &:hover {
+      background-color: ${(props) => props.theme.color.light};
+      color: ${(props) => props.theme.color.primary};
+    }
   `,
   secondary: css`
     color: ${(props) => props.theme.color.primary};
