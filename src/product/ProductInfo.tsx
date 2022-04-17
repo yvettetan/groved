@@ -3,6 +3,7 @@ import styled from "styled-components";
 import { PlantInfo } from "../data";
 import theme from "../theme";
 import Button from "../shared/Button";
+import Tabs from "../shared/Tabs";
 
 const Container = styled.div`
   margin-bottom: 2.5rem;
@@ -100,6 +101,19 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
     ></button>
   ));
 
+  const tabContent = [
+    {
+      title: "Plant Information",
+      body: props.description,
+      isContentList: false,
+    },
+    {
+      title: "Plant Care",
+      body: props.care!,
+      isContentList: true,
+    },
+  ];
+
   return (
     <Container>
       <img className="product-img" src={imageSrc} alt={props.name} />
@@ -118,12 +132,34 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
         </div>
         {props.children}
         {props.scientificName && (
-          <div>
-            <span>PLANT POT</span>
-            <hr />
-            <p>Color: {selectedColor}</p>
-            {colorOptions}
-          </div>
+          <>
+            <div>
+              <span
+                style={{
+                  fontFamily: `${theme.fontFamily.headline}`,
+                  color: `${theme.color.primaryLight}`,
+                }}
+              >
+                PLANT POT
+              </span>
+              <hr />
+              <p style={{ color: `${theme.color.dark}` }}>
+                Color:{" "}
+                <em
+                  style={{
+                    textTransform: "capitalize",
+                    color: `${theme.color.primaryLight}`,
+                  }}
+                >
+                  {selectedColor}
+                </em>
+              </p>
+              {colorOptions}
+              <br />
+              <br />
+            </div>
+            <Tabs content={tabContent} />
+          </>
         )}
         <ButtonContainer>
           <Button color="primary">Add to cart</Button>
