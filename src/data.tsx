@@ -3,9 +3,9 @@ export interface PlantInfo {
   name: string;
   scientificName: string;
   description: string;
-  price: string;
+  price: number;
   img: string;
-  care?: { sun: string; water: string; other: string };
+  care: { sun: string; water: string; other: string };
 }
 
 let plants: PlantInfo[] = [
@@ -15,7 +15,7 @@ let plants: PlantInfo[] = [
     scientificName: "calathea orbifolia",
     description:
       "The Calathea Orbifolia’s broad, oval-shaped leaves with contrasting green stripes make it a popular plant for home decor and plant enthusiasts alike. Its lush foliage benefits from frequent waterings and high humidity. In ideal conditions (think tropical), its pet-friendly leaves can grow over a foot wide!",
-    price: "360.00",
+    price: 360,
     img: "/assets/images/plants/calathea-orbifolia/calathea-orbifolia-cream.jpeg",
     care: {
       sun: "Thrives in medium to bright indirect light, but can tolerate low indirect light. Not suited for direct sun.",
@@ -30,7 +30,7 @@ let plants: PlantInfo[] = [
     scientificName: "monstera adansonii",
     description:
       "Monstera Adansonii are known for their lacy green leaves, covered with natural leaf-holes called fenestrations. It also boasts soft yet resilient stems that can be trained to climb, hang, or trail.",
-    price: "360.00",
+    price: 360,
     img: "/assets/images/plants/swiss-cheese-plant/swiss-cheese-plant-blush.jpeg",
     care: {
       sun: "Thrives in bright indirect to medium light.",
@@ -46,7 +46,7 @@ let plants: PlantInfo[] = [
     scientificName: "zamioculcas zamiifolia",
     description:
       "The ZZ Plant is characterized by its waxy green leaves above the surface of its potting mix, and its large potato-like rhizomes underneath. These rhizomes store water, making the ZZ a hardy, drought-tolerant houseplant that only needs water every few weeks.",
-    price: "360.00",
+    price: 360,
     img: "/assets/images/plants/zz-plant/zz-plant-mint.jpeg",
     care: {
       sun: "Thrives in medium to bright indirect light, but can tolerate low indirect light. Not suited for intense, direct sun.",
@@ -62,7 +62,7 @@ let plants: PlantInfo[] = [
     scientificName: "philodendron birkin",
     description:
       "The Philodendron Birkin (sometimes called the White Wave) is characterized by its lush green leaves with white or yellow pinstripes. A unique hybrid, you won't find this plant in the wild. It is a slow-growing plant that can reach up to 3 feet tall indoors if well cared for.",
-    price: "360.00",
+    price: 360,
     img: "/assets/images/plants/white-wave/white-wave-black.jpeg",
     care: {
       sun: "Thrives in med-bright indirect light. Not suited for direct afternoon sun.",
@@ -77,8 +77,15 @@ let plants: PlantInfo[] = [
     scientificName: "peperomia obtusifolia",
     description:
       "The Peperomia obtusifolia, also known as the baby rubber plant, is an easy-going houseplant characterized by its thick, succulent-like green leaves. A popular variety of Peperomia, it does not need much to thrive and might even reward you with white flower spikes once a year.",
-    price: "360.00",
+    price: 360,
     img: "/assets/images/plants/baby-rubber-plant/baby-rubber-plant-teracotta.jpeg",
+    care: {
+      sun: "Most prefer medium to bright indirect light, but can tolerate low, indirect light. Not suited for intense, direct sun.",
+      water:
+        "Water every 1-2 weeks, allowing the potting soil to dry out between waterings. Although some less-succulent varieties are native to the tropics and can benefit from higher humidity, be mindful not to over water them.",
+      other:
+        "Pet-friendly and non-toxic. Popular houseplants because they are petite and compact. Indoors, most Peperomia plants will stay fairly small, never surpassing two feet tall",
+    },
   },
   {
     id: 6,
@@ -86,14 +93,14 @@ let plants: PlantInfo[] = [
     scientificName: "callisia repens",
     description:
       "The Tradescantia Pink Panther is known for its tiny pink and green variegated leaves. Other names for this unique plant include Callisia repens 'Pink Lady' and 'Pink Turtle,' or the creeping inch plant, thanks to its colorful foliage, slow growth habit, and trailing stems as the plant matures.",
-    price: "360.00",
+    price: 360,
     img: "/assets/images/plants/pink-panther/pink-panther-cream.jpeg",
     care: {
       sun: "Thrives in med-bright indirect light. Not suited for low light or direct sun.",
       water:
         "Water every 1-2 weeks allowing about half the soil to dry out between waterings. Expect to water more often in brighter light conditions and less often in lower light.",
       other:
-        "Yes, but apparently can cause skin irritation despite not being poisonous.",
+        "Pet-friendly, but apparently can cause skin irritation despite not being poisonous.",
     },
   },
   {
@@ -102,7 +109,7 @@ let plants: PlantInfo[] = [
     scientificName: "dracaena trifasciata",
     description:
       "The Snake Plant, or Dracaena trifasciata 'Laurentii', is a succulent plant characterized by its upright sword-like leaves with vibrant yellow edges. It is popular for its incredibly easy-going nature (it can tolerate low light and drought) and its air-purifying capabilities. The easiest way to kill this plant is to overcare for it.",
-    price: "360.00",
+    price: 360,
     img: "/assets/images/plants/snake-plant/snake-plant-teracotta.jpeg",
     care: {
       sun: "Thrives in medium to bright indirect light, but can tolerate low indirect light.",
@@ -118,7 +125,7 @@ let plants: PlantInfo[] = [
     scientificName: "ficus lyrata",
     description:
       "The Fiddle Leaf Fig is famous for its broad, vibrant green leaves with prominent veining. It prefers a stable environment and can be fickle when temps fluctuate. Keep it in bright light, and water about once every 1–2 weeks.",
-    price: "360.00",
+    price: 360,
     img: "/assets/images/plants/fiddle-leaf-fig/fiddle-leaf-fig-mint.jpeg",
     care: {
       sun: "Thrives in bright indirect light to full sun. Can benefit from a few hours of direct sun.",
