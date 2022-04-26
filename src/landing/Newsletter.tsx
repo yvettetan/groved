@@ -29,7 +29,7 @@ const NewsletterContainer = styled.section`
   }
 
   input.error {
-    border-color: red;
+    border: 1px solid red;
   }
 
   .input-feedback {
@@ -85,11 +85,18 @@ const Newsletter = () => {
             } = props;
             return (
               <form onSubmit={handleSubmit}>
-                {errors.email && touched.email && (
-                  <div className="input-feedback">Email is {errors.email}</div>
-                )}
-                <div style={{ display: "flex", justifyContent: "center" }}>
+                <div
+                  style={{
+                    display: "flex",
+                    justifyContent: "center",
+                  }}
+                >
                   <div>
+                    {errors.email && touched.email && (
+                      <div className="input-feedback">
+                        Email is {errors.email}
+                      </div>
+                    )}
                     <input
                       id="email"
                       placeholder="Drop your email here"
@@ -103,10 +110,10 @@ const Newsletter = () => {
                           : "text-input"
                       }
                     />
+                    <Button type="submit" disabled={isSubmitting}>
+                      Subscribe
+                    </Button>
                   </div>
-                  <Button type="submit" disabled={isSubmitting}>
-                    Subscribe
-                  </Button>
                 </div>
               </form>
             );
