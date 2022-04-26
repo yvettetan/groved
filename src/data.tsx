@@ -149,40 +149,48 @@ export function getMultiplePlants(plants: PlantInfo[], num: number) {
   const shuffled = [...plants].sort(() => 0.5 - Math.random());
   return shuffled.slice(0, num);
 }
-
-interface ArticleInfo {
+export interface GardenKitInfo {
   id: number;
-  title: string;
+  name: string;
+  description: string;
+  inclusions: string;
+  price: number;
   img: string;
 }
 
-let articles: ArticleInfo[] = [
+let gardenKits: GardenKitInfo[] = [
   {
     id: 1,
-    title: "all about you: baby rubber plant",
-    img: "/assets/images/blog/article1.png",
+    name: "potting supplies duo",
+    description:
+      'Our Potting Supplies Duo is all you need to pot your plants at home. Our all-natural mix gives your plant roots the preferred air, moisture and nutrition balance they need; while our lava rocks create a place for excess water to pool, away from your plant\'s roots. Organic Potting Mix bag is enough to pot 2–3 small plants (5" diam planters) or 1-2 medium plants (7" diam planters).',
+    inclusions:
+      "Kit includes: one 4.5 quarts (unsettled) bag of Organic Potting Mix (compost, pine bark, coir, worm castings, perlite) and bag of Lava Rocks",
+    price: 450,
+    img: "/assets/images/kits/potting-supplies-duo.jpeg",
   },
   {
     id: 2,
-    title: "plants that will brighten up your home in an instant",
-    img: "/assets/images/blog/article2.png",
+    name: "soil care kit",
+    description:
+      "Try our new Soil Care Kit to take your plant care to the next level. We've paired our exclusive Sill Plant Fertilizer with our 3-in-1 Moisture Meter (helps prevent over watering!) and a bag of our signature potting soil.",
+    inclusions:
+      "Kit includes: 8 fl. oz Plant Fertilizer, 3-in-1 Moisture Meter, 32 oz Potting Mix",
+    price: 600,
+    img: "/assets/images/kits/soil-care-kit.jpeg",
   },
   {
     id: 3,
-    title: "how to take care of succulents",
-    img: "/assets/images/blog/article3.png",
+    name: "i dig you kit",
+    description:
+      "Our I Dig You Kit is the perfect birthday or “just because” gift for the fellow plant lovers in your life. The giftable bundle includes a heartleaf Philodendron, small Grant ceramic planter, bag of organic potting mix, bag of lava rocks, plant mister, and gardening gloves. It’s a fun way to let loved ones near and far know you’re thinking of them!",
+    inclusions:
+      "Kit includes: heartleaf Philodendron in ceramic planter, mister, gardening gloves, bag of organic potting mix, bag of lava rocks",
+    price: 900,
+    img: "/assets/images/kits/i-dig-you-kit.jpeg",
   },
 ];
 
-export const getArticles = () => {
-  return articles;
-};
-
-export const getArticle = (title: string) => {
-  return articles.find((article) => article.title === title);
-};
-
-export const getMultipleArticles = (articles: ArticleInfo[], num: number) => {
-  const shuffled = [...articles].sort(() => 0.5 - Math.random());
-  return shuffled.slice(0, num);
-};
+export function getGardenKits() {
+  return gardenKits;
+}
