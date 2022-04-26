@@ -46,6 +46,8 @@ const GlobalStyle = createGlobalStyle<Props>`
     color: ${(props) => props.theme.color.primary};
     font-family: ${(props) => props.theme.fontFamily.default};
     font-size: ${(props) => props.theme.fontSize.default};
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 
   h1, h2, h3 {
@@ -57,6 +59,11 @@ const GlobalStyle = createGlobalStyle<Props>`
     text-decoration: none;
     color: ${(props) => props.theme.color.primary};
   }
-`;
+  button {
+    cursor: pointer;
+    background-color: transparent;
+    border: 0;
+  }
+  `;
 
 export default GlobalStyle;
