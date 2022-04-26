@@ -224,6 +224,7 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
               <span
                 style={{
                   padding: ".5rem 3rem",
+                  width: "1rem",
                 }}
               >
                 {counter}
@@ -245,9 +246,10 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
               </CounterButton>
             </div>
           </div>
-          <Button color="primary">{`Add to cart -  ${formatCurrency(
-            counter * props.price
-          )}`}</Button>
+          <Button
+            color="primary"
+            width="12rem"
+          >{`Add to cart -  ${formatCurrency(counter * props.price)}`}</Button>
         </CheckoutContainer>
       </InfoContainer>
     </Container>
