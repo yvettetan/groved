@@ -5,6 +5,7 @@ import { formatCurrency } from "../utils";
 const Container = styled.div`
   display: flex;
   flex-direction: column;
+  margin: 1rem 0;
 
   .plant-name {
     text-transform: capitalize;
@@ -40,7 +41,7 @@ const ItemCard = ({
 }: {
   img: string;
   name: string;
-  scientificName: string;
+  scientificName?: string;
   price: number;
   size?: "small" | "large";
 }) => {
@@ -62,7 +63,10 @@ const ItemCard = ({
         height={getDimensions(size)?.height}
       />
       <h3 className="plant-name">{name}</h3>
-      <p className="plant-scientific-name">{scientificName}</p>
+      {scientificName && (
+        <p className="plant-scientific-name">{scientificName}</p>
+      )}
+
       <p className="plant-price">PHP {formatCurrency(price)}</p>
     </Container>
   );
