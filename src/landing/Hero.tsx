@@ -1,6 +1,7 @@
 import React from "react";
 import styled from "styled-components";
 import Button from "../shared/Button";
+import { Link } from "react-router-dom";
 
 const HeroContainer = styled.div`
   background: url("/assets/images/hero.png");
@@ -35,9 +36,11 @@ const Hero = () => {
       <HeroText>
         <h1>Find your next worthwhile growth</h1>
         <p>Plant picks &amp; everything in between</p>
-        <Button color="primary" width="50%">
-          Shop Now
-        </Button>
+        <Link to={"/shop/homebud-grove"}>
+          <Button color="primary" width="50%">
+            Shop Now
+          </Button>
+        </Link>
       </HeroText>
     </HeroContainer>
   );

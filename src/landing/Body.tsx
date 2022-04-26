@@ -53,7 +53,7 @@ const Body = () => {
           {plants.map((plant) => {
             return (
               <Link
-                to={`/shop/${plant.name.replace(/\s/g, "-")}`}
+                to={`/shop/homebud-grove/${plant.name.replace(/\s/g, "-")}`}
                 key={plant.id}
               >
                 <ItemCard {...plant} size={"large"} />
@@ -69,12 +69,16 @@ const Body = () => {
           <div style={{ maxWidth: "15rem", margin: "0 auto" }}>
             <h3>Homebud grove</h3>
             <p>Perfect home plants</p>
-            <Button color="secondary">View collection</Button>
+            <Link to={"/shop/homebud-grove"}>
+              <Button color="secondary">View collection</Button>
+            </Link>
           </div>
           <div style={{ maxWidth: "15rem", margin: "0 auto" }}>
             <h3>Garden kits</h3>
             <p>Green thumb starter kit</p>
-            <Button color="secondary">View collection</Button>
+            <Link to={"/shop/garden-kits"}>
+              <Button color="secondary">View collection</Button>
+            </Link>
           </div>
           <img src={"/assets/images/garden-kit.png"} alt="garden kit" />
         </div>

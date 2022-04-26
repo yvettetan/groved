@@ -47,7 +47,7 @@ const Nav = styled.nav`
   }
 `;
 const NavBrand = styled.div`
-  font-size: 1.5rem;
+  font-size: 1.2rem;
   .logo-container {
     display: flex;
     align-items: center;
@@ -135,11 +135,11 @@ const Header = () => {
         </button>
         <NavLinks className={isNavExpanded ? "nav-menu expanded" : "nav-menu"}>
           <ul>
-            <Link to="/shop" onClick={hideExpanded}>
-              <li>Shop</li>
+            <Link to="/shop/homebud-grove" onClick={hideExpanded}>
+              <li>Plants</li>
             </Link>
-            <Link to="/blog" onClick={hideExpanded}>
-              <li>Blog</li>
+            <Link to="/shop/garden-kits" onClick={hideExpanded}>
+              <li>Kits</li>
             </Link>
             <li
               onClick={() => {
