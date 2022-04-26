@@ -27,14 +27,16 @@ const TabMenuItem = styled.span`
   text-transform: uppercase;
 `;
 
-const TabContent = styled.div``;
+const TabContent = styled.div`
+  min-height: 4rem;
+`;
 
 const Tabs = ({ content }: { content: ContentProps[] }) => {
   const [activeTab, setActiveTab] = useState(0);
 
   useEffect(() => {
     setActiveTab(0);
-  }, [content]);
+  }, []);
 
   const tabMenuItems = content.map((item, i) => {
     const changeTab = () => {

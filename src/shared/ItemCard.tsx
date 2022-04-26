@@ -1,5 +1,6 @@
 import React from "react";
 import styled from "styled-components";
+import { formatCurrency } from "../utils";
 
 const Container = styled.div`
   display: flex;
@@ -40,7 +41,7 @@ const ItemCard = ({
   img: string;
   name: string;
   scientificName: string;
-  price: string;
+  price: number;
   size?: "small" | "large";
 }) => {
   const getDimensions = (size: string | undefined) => {
@@ -62,7 +63,7 @@ const ItemCard = ({
       />
       <h3 className="plant-name">{name}</h3>
       <p className="plant-scientific-name">{scientificName}</p>
-      <p className="plant-price">PHP {price}</p>
+      <p className="plant-price">PHP {formatCurrency(price)}</p>
     </Container>
   );
 };

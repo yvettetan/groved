@@ -1,9 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import { PlantInfo } from "../data";
 import theme from "../theme";
-import Button from "../shared/Button";
 import Tabs from "../shared/Tabs";
+import { useSelector, useDispatch } from "react-redux";
+import allActions from "../redux/actions";
+import { RootState } from "../store";
+import { formatCurrency } from "../utils";
+import Button from "../shared/Button";
 
 const Container = styled.div`
   margin-bottom: 2.5rem;
@@ -47,6 +51,18 @@ const Container = styled.div`
   }
 `;
 
+const InfoHeader = styled.span`
+  font-family: ${theme.fontFamily.headline};
+  color: ${theme.color.primaryLight};
+`;
+
+const HorizontalLine = styled.hr`
+  margin: 0;
+  height: 1px;
+  background-color: ${(props) => props.theme.color.gray};
+  border: none;
+`;
+
 const InfoContainer = styled.div`
   padding: 1.5rem;
   width: 100%;
@@ -57,10 +73,17 @@ const InfoContainer = styled.div`
   }
 `;
 
-const ButtonContainer = styled.div`
-  div {
-    margin: 0.5rem 0;
-  }
+const CheckoutContainer = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  margin-top: 1rem;
+`;
+
+const CounterButton = styled.button`
+  border: none;
+  background-color: ${(props) => props.theme.color.light};
+  cursor: "pointer";
+  padding: 1rem;
 `;
 
 const getImagePath = (plantName: string, color: string) => {
@@ -75,11 +98,16 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
   const [imageSrc, setImageSrc] = useState(
     getImagePath(plantName, selectedColor)
   );
+  useEffect(() => {
+    setImageSrc(getImagePath(plantName, selectedColor));
+  }, [plantName, selectedColor]);
 
   useEffect(() => {
-    setImageSrc(getImagePath(plantName, defaultColor!));
     setSelectedColor(defaultColor);
-  }, [plantName, defaultColor]);
+  }, [defaultColor]);
+
+  const counter = useSelector((state: RootState) => state.counter);
+  const dispatch = useDispatch();
 
   const changeProductColor = (e: React.MouseEvent<HTMLElement>) => {
     const color = e.currentTarget.style.backgroundColor;
@@ -114,6 +142,15 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
     },
   ];
 
+  const decrementRef = useRef<HTMLButtonElement>(null);
+  const incrementRef = useRef<HTMLButtonElement>(null);
+
+  useEffect(() => {
+    if (counter <= 1) {
+      decrementRef.current!.style.cursor = "not-allowed";
+    }
+  }, [counter]);
+
   return (
     <Container>
       <img className="product-img" src={imageSrc} alt={props.name} />
@@ -126,7 +163,7 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
                 <p className="plant-scientific-name">{props.scientificName}</p>
               )}
             </div>
-            <p className="product-price">PHP {props.price}</p>
+            <p className="product-price">{formatCurrency(props.price)}</p>
           </div>
           <p>{props.description}</p>
         </div>
@@ -134,15 +171,8 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
         {props.scientificName && (
           <>
             <div>
-              <span
-                style={{
-                  fontFamily: `${theme.fontFamily.headline}`,
-                  color: `${theme.color.primaryLight}`,
-                }}
-              >
-                PLANT POT
-              </span>
-              <hr />
+              <InfoHeader>PLANT POT</InfoHeader>
+              <HorizontalLine />
               <p style={{ color: `${theme.color.dark}` }}>
                 Color:{" "}
                 <em
@@ -161,10 +191,64 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
             <Tabs content={tabContent} />
           </>
         )}
-        <ButtonContainer>
-          <Button color="primary">Add to cart</Button>
-          <Button color="secondary">Buy now</Button>
-        </ButtonContainer>
+        <br />
+        <InfoHeader>QUANTITY (maximum 20)</InfoHeader>
+        <HorizontalLine />
+        <CheckoutContainer>
+          <div>
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                marginRight: "1rem",
+                border: `1px solid ${theme.color.primary}`,
+                height: "100%",
+              }}
+            >
+              <CounterButton
+                ref={decrementRef}
+                onClick={(e) => {
+                  if (counter > 1) {
+                    dispatch(allActions.decrement());
+                    incrementRef.current!.style.cursor = "pointer";
+                  }
+                  if (counter <= 1) {
+                    e.currentTarget.style.cursor = "not-allowed";
+                  }
+                }}
+                disabled={counter <= 1 ? true : false}
+              >
+                -
+              </CounterButton>
+              <span
+                style={{
+                  padding: ".5rem 3rem",
+                }}
+              >
+                {counter}
+              </span>
+              <CounterButton
+                onClick={(e) => {
+                  if (counter < 20) {
+                    dispatch(allActions.increment());
+                  }
+                  decrementRef.current!.style.cursor = "pointer";
+                  if (counter >= 19) {
+                    e.currentTarget.style.cursor = "not-allowed";
+                  }
+                }}
+                ref={incrementRef}
+                disabled={counter >= 20 ? true : false}
+              >
+                +
+              </CounterButton>
+            </div>
+          </div>
+          <Button color="primary">{`Add to cart -  ${formatCurrency(
+            counter * props.price
+          )}`}</Button>
+        </CheckoutContainer>
       </InfoContainer>
     </Container>
   );

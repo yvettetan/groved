@@ -14,36 +14,40 @@ import BlogContainer from "./blog/BlogContainer";
 import ProductContainer from "./product/ProductContainer";
 import ProductsContainer from "./product/ProductsContainer";
 import ScrollToTop from "./shared/ScrollToTop";
+import { Provider } from "react-redux";
+import { store } from "./store";
 
 ReactDOM.render(
   <React.StrictMode>
-    <ThemeProvider theme={theme}>
-      <Normalize />
-      <GlobalStyle />
-      <BrowserRouter>
-        <ScrollToTop>
-          <Routes>
-            <Route path="/" element={<App />}>
-              <Route path="/" element={<Landing />} />
-              <Route path="about" element={<AboutContainer />} />
-              <Route path="shop" element={<ShopContainer />}>
-                <Route index element={<ProductsContainer />} />
-                <Route path=":plantName" element={<ProductContainer />} />
+    <Provider store={store}>
+      <ThemeProvider theme={theme}>
+        <Normalize />
+        <GlobalStyle />
+        <BrowserRouter>
+          <ScrollToTop>
+            <Routes>
+              <Route path="/" element={<App />}>
+                <Route path="/" element={<Landing />} />
+                <Route path="about" element={<AboutContainer />} />
+                <Route path="shop" element={<ShopContainer />}>
+                  <Route index element={<ProductsContainer />} />
+                  <Route path=":plantName" element={<ProductContainer />} />
+                </Route>
+                <Route path="blog" element={<BlogContainer />} />
               </Route>
-              <Route path="blog" element={<BlogContainer />} />
-            </Route>
-            <Route
-              path="*"
-              element={
-                <main>
-                  <p>There's nothing here!</p>
-                </main>
-              }
-            />
-          </Routes>
-        </ScrollToTop>
-      </BrowserRouter>
-    </ThemeProvider>
+              <Route
+                path="*"
+                element={
+                  <main>
+                    <p>There's nothing here!</p>
+                  </main>
+                }
+              />
+            </Routes>
+          </ScrollToTop>
+        </BrowserRouter>
+      </ThemeProvider>
+    </Provider>
   </React.StrictMode>,
   document.getElementById("root")
 );
