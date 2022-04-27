@@ -1,11 +1,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
-import { PlantInfo } from "../data";
 import theme from "../theme";
 import Tabs from "../shared/Tabs";
-import { useSelector, useDispatch } from "react-redux";
-import allActions from "../redux/actions";
-import { RootState } from "../store";
 import { formatCurrency } from "../utils";
 import Button from "../shared/Button";
 
@@ -90,7 +86,18 @@ const getImagePath = (plantName: string, color: string) => {
   return `/assets/images/plants/${plantName}/${plantName}-${color}.jpeg`;
 };
 
-const ProductInfo: React.FC<PlantInfo> = (props) => {
+interface PropInfo {
+  id: number;
+  name: string;
+  scientificName: string;
+  description: string;
+  price: number;
+  img: string;
+  care: { sun: string; water: string; other: string };
+  handleAddToCart: (color: string, quantity: number) => void;
+}
+
+const ProductInfo: React.FC<PropInfo> = (props) => {
   const plantName = props.name.replace(/\s/g, "-");
   const potColors = theme.potColor;
   const defaultColor = Object.keys(potColors)[0];
@@ -98,6 +105,7 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
   const [imageSrc, setImageSrc] = useState(
     getImagePath(plantName, selectedColor)
   );
+  const [quantity, setQuantity] = useState(1);
   useEffect(() => {
     setImageSrc(getImagePath(plantName, selectedColor));
   }, [plantName, selectedColor]);
@@ -105,9 +113,6 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
   useEffect(() => {
     setSelectedColor(defaultColor);
   }, [defaultColor]);
-
-  const counter = useSelector((state: RootState) => state.counter);
-  const dispatch = useDispatch();
 
   const changeProductColor = (e: React.MouseEvent<HTMLElement>) => {
     const color = e.currentTarget.style.backgroundColor;
@@ -146,10 +151,10 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
   const incrementRef = useRef<HTMLButtonElement>(null);
 
   useEffect(() => {
-    if (counter <= 1) {
+    if (quantity <= 1) {
       decrementRef.current!.style.cursor = "not-allowed";
     }
-  }, [counter]);
+  }, [quantity]);
 
   return (
     <Container>
@@ -209,15 +214,15 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
               <CounterButton
                 ref={decrementRef}
                 onClick={(e) => {
-                  if (counter > 1) {
-                    dispatch(allActions.decrement());
+                  if (quantity > 1) {
+                    setQuantity(quantity - 1);
                     incrementRef.current!.style.cursor = "pointer";
                   }
-                  if (counter <= 1) {
+                  if (quantity <= 1) {
                     e.currentTarget.style.cursor = "not-allowed";
                   }
                 }}
-                disabled={counter <= 1 ? true : false}
+                disabled={quantity <= 1 ? true : false}
               >
                 -
               </CounterButton>
@@ -227,20 +232,20 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
                   width: "1rem",
                 }}
               >
-                {counter}
+                {quantity}
               </span>
               <CounterButton
                 onClick={(e) => {
-                  if (counter < 20) {
-                    dispatch(allActions.increment());
+                  if (quantity < 20) {
+                    setQuantity(quantity + 1);
                   }
                   decrementRef.current!.style.cursor = "pointer";
-                  if (counter >= 19) {
+                  if (quantity >= 19) {
                     e.currentTarget.style.cursor = "not-allowed";
                   }
                 }}
                 ref={incrementRef}
-                disabled={counter >= 20 ? true : false}
+                disabled={quantity >= 20 ? true : false}
               >
                 +
               </CounterButton>
@@ -249,7 +254,11 @@ const ProductInfo: React.FC<PlantInfo> = (props) => {
           <Button
             color="primary"
             width="12rem"
-          >{`Add to cart -  ${formatCurrency(counter * props.price)}`}</Button>
+            onClick={() => {
+              setQuantity(1);
+              props.handleAddToCart(selectedColor, quantity);
+            }}
+          >{`Add to cart -  ${formatCurrency(quantity * props.price)}`}</Button>
         </CheckoutContainer>
       </InfoContainer>
     </Container>

@@ -5,6 +5,8 @@ import styled from "styled-components";
 import { getPlants, getMultiplePlants } from "../data";
 import ItemCard from "../shared/ItemCard";
 import ProductInfo from "./ProductInfo";
+import { addToCart } from "../redux/reducers/cart";
+import { useDispatch } from "react-redux";
 
 const SectionContainer = styled.section`
   max-width: 80rem;
@@ -30,9 +32,26 @@ const ProductContainer: React.FC = (props) => {
   const plants = getPlants().filter((item) => item !== plant);
   const suggestedPlants = getMultiplePlants(plants, 4);
 
+  const dispatch = useDispatch();
+
+  const handleAddToCart = (color: string, quantity: number) => {
+    plant &&
+      dispatch(
+        addToCart({
+          id: plant.id,
+          name: plant.name,
+          quantity: quantity,
+          image: plant.img,
+          price: plant.price,
+          color: color,
+        })
+      );
+  };
   return (
     <div style={{ margin: "2rem 8rem" }}>
-      <SectionContainer>{plant && <ProductInfo {...plant} />}</SectionContainer>
+      <SectionContainer>
+        {plant && <ProductInfo {...plant} handleAddToCart={handleAddToCart} />}
+      </SectionContainer>
       <SectionContainer>
         <h2>You might also like</h2>
         <ItemList>
