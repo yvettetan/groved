@@ -74,8 +74,11 @@ export const cartReducer = createSlice({
       state.cartItems = newItems;
     },
     increaseQuantity: (state, action) => {
-      state.cartQuantity++;
-      state.cartItems[action.payload].quantity++;
+      let quanity = state.cartItems[action.payload].quantity;
+      if (quanity < 20) {
+        state.cartQuantity++;
+        state.cartItems[action.payload].quantity++;
+      }
     },
     decreaseQuantity: (state, action) => {
       let quantity_ = state.cartItems[action.payload].quantity;
