@@ -16,6 +16,7 @@ import GardenKitsContainer from "./shop/GardenKitsContainer";
 import ScrollToTop from "./shared/ScrollToTop";
 import { Provider } from "react-redux";
 import { store } from "./store";
+import CartContainer from "./cart/CartContainer";
 
 ReactDOM.render(
   <React.StrictMode>
@@ -42,6 +43,7 @@ ReactDOM.render(
                     element={<ProductContainer />}
                   />
                 </Route>
+                <Route path="/cart" element={<CartContainer />} />
               </Route>
               <Route
                 path="*"
