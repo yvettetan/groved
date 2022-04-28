@@ -94,7 +94,7 @@ interface PropInfo {
   price: number;
   img: string;
   care: { sun: string; water: string; other: string };
-  handleAddToCart: (color: string, quantity: number) => void;
+  handleAddToCart: (color: string, imageSrc: string, quantity: number) => void;
 }
 
 const ProductInfo: React.FC<PropInfo> = (props) => {
@@ -256,7 +256,8 @@ const ProductInfo: React.FC<PropInfo> = (props) => {
             width="12rem"
             onClick={() => {
               setQuantity(1);
-              props.handleAddToCart(selectedColor, quantity);
+              props.handleAddToCart(selectedColor, imageSrc, quantity);
+              window.alert(`${props.name} is added to your cart`);
             }}
           >{`Add to cart -  ${formatCurrency(quantity * props.price)}`}</Button>
         </CheckoutContainer>

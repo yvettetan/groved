@@ -34,14 +34,18 @@ const ProductContainer: React.FC = (props) => {
 
   const dispatch = useDispatch();
 
-  const handleAddToCart = (color: string, quantity: number) => {
+  const handleAddToCart = (
+    color: string,
+    imageSrc: string,
+    quantity: number
+  ) => {
     plant &&
       dispatch(
         addToCart({
           id: plant.id,
           name: plant.name,
           quantity: quantity,
-          image: plant.img,
+          image: imageSrc,
           price: plant.price,
           color: color,
         })
