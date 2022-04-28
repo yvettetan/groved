@@ -40,9 +40,13 @@ export const cartReducer = createSlice({
         state.cartQuantity = state.cartQuantity + item.quantity;
       } else {
         let isInCart = false;
-        state.cartItems.map((item, key) => {
-          if (item.id === action.payload.id) {
-            state.cartItems[key].quantity++;
+        state.cartItems.map((item) => {
+          if (
+            item.id === action.payload.id &&
+            item.color === action.payload.color
+          ) {
+            item.quantity = item.quantity + action.payload.quantity;
+            state.cartQuantity = state.cartQuantity + action.payload.quantity;
             isInCart = true;
           }
           return isInCart;
