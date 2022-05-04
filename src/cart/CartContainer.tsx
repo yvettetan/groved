@@ -15,9 +15,8 @@ import { ActionCreatorWithPayload } from "@reduxjs/toolkit";
 import { Link } from "react-router-dom";
 
 const Container = styled.div`
-  margin: 8rem auto;
+  margin: 8rem auto 10rem auto;
   max-width: 1200px;
-  height: calc(100vh - 16rem);
   position: relative;
 
   h1,
@@ -39,7 +38,7 @@ const Container = styled.div`
     display: flex;
     flex-direction: column;
     width: 100%;
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 780px) {
       flex-direction: row;
       padding: 0 1rem;
       margin: 0 auto;
@@ -51,7 +50,7 @@ const Container = styled.div`
       position: absolute;
       right: 0;
       bottom: 0;
-      @media screen and (min-width: 768px) {
+      @media screen and (min-width: 780px) {
         position: static;
       }
     }
@@ -65,7 +64,7 @@ const Container = styled.div`
       margin: 0;
       display: inline;
     }
-    @media screen and (min-width: 768px) {
+    @media screen and (min-width: 780px) {
       padding: 0 1rem;
       text-align: center;
       font-size: 1.2rem;
