@@ -2,12 +2,12 @@ import React from "react";
 import styled from "styled-components";
 import { formatCurrency } from "../utils";
 
-const Container = styled.div`
+const Container = styled.li`
   display: flex;
   flex-direction: column;
   margin: 1rem 0;
 
-  .plant-name {
+  .item-name {
     text-transform: capitalize;
     margin: 0;
   }
@@ -20,7 +20,7 @@ const Container = styled.div`
   .plant-scientific-name:first-letter {
     text-transform: capitalize;
   }
-  .plant-price {
+  .item-price {
     color: ${(props) => props.theme.color.secondary};
     margin-top: 0.5rem;
   }
@@ -62,12 +62,12 @@ const ItemCard = ({
         width={getDimensions(size)?.width}
         height={getDimensions(size)?.height}
       />
-      <h3 className="plant-name">{name}</h3>
+      <h3 className="item-name">{name}</h3>
       {scientificName && (
         <p className="plant-scientific-name">{scientificName}</p>
       )}
 
-      <p className="plant-price">PHP {formatCurrency(price)}</p>
+      <p className="item-price">{formatCurrency(price)}</p>
     </Container>
   );
 };

@@ -5,13 +5,17 @@ import Tabs from "../shared/Tabs";
 import { formatCurrency } from "../utils";
 import Button from "../shared/Button";
 
-const Container = styled.div`
+const ItemContainer = styled.div`
+  width: 100%;
+  margin-top: 6rem;
   margin-bottom: 2.5rem;
   display: flex;
-  margin-top: 10rem;
+  flex-direction: column;
+  align-items: center;
 
   .product-img {
-    width: 445px;
+    width: 100%;
+    max-width: 445px;
     height: 635px;
   }
 
@@ -45,6 +49,11 @@ const Container = styled.div`
     border: 2px solid white;
     outline: 1px solid black;
   }
+
+  @media (min-width: 980px) {
+    padding: 2rem;
+    flex-direction: row;
+  }
 `;
 
 const InfoHeader = styled.span`
@@ -60,12 +69,16 @@ const HorizontalLine = styled.hr`
 `;
 
 const InfoContainer = styled.div`
-  padding: 1.5rem;
-  width: 100%;
+  width: 90%;
+  padding: 1rem;
+
   .product-info {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
+  }
+  @media (min-width: 600px) {
+    margin-left: 2rem;
   }
 `;
 
@@ -82,32 +95,37 @@ const CounterButton = styled.button`
   padding: 1rem;
 `;
 
-const getImagePath = (plantName: string, color: string) => {
-  return `/assets/images/plants/${plantName}/${plantName}-${color}.jpeg`;
+const getImagePath = (itemName: string, color: string) => {
+  if (color) {
+    return `/assets/images/plants/${itemName}/${itemName}-${color}.jpeg`;
+  } else {
+    return `/assets/images/kits/${itemName}.jpeg`;
+  }
 };
 
 interface PropInfo {
   id: number;
   name: string;
-  scientificName: string;
   description: string;
   price: number;
   img: string;
-  care: { sun: string; water: string; other: string };
-  handleAddToCart: (color: string, imageSrc: string, quantity: number) => void;
+  scientificName?: string;
+  care?: { sun: string; water: string; other: string };
+  inclusions?: string;
+  handleAddToCart: (imageSrc: string, quantity: number, color?: string) => void;
 }
 
 const ProductInfo: React.FC<PropInfo> = (props) => {
   const plantName = props.name.replace(/\s/g, "-");
   const potColors = theme.potColor;
-  const defaultColor = Object.keys(potColors)[0];
+  const defaultColor = props.scientificName && Object.keys(potColors)[0];
   const [selectedColor, setSelectedColor] = useState(defaultColor);
   const [imageSrc, setImageSrc] = useState(
-    getImagePath(plantName, selectedColor)
+    getImagePath(plantName, selectedColor!)
   );
   const [quantity, setQuantity] = useState(1);
   useEffect(() => {
-    setImageSrc(getImagePath(plantName, selectedColor));
+    setImageSrc(getImagePath(plantName, selectedColor!));
   }, [plantName, selectedColor]);
 
   useEffect(() => {
@@ -154,10 +172,10 @@ const ProductInfo: React.FC<PropInfo> = (props) => {
     if (quantity <= 1) {
       decrementRef.current!.style.cursor = "not-allowed";
     }
-  }, [quantity]);
+  }, [quantity, imageSrc]);
 
   return (
-    <Container>
+    <ItemContainer>
       <img className="product-img" src={imageSrc} alt={props.name} />
       <InfoContainer>
         <div>
@@ -173,7 +191,7 @@ const ProductInfo: React.FC<PropInfo> = (props) => {
           <p>{props.description}</p>
         </div>
         {props.children}
-        {props.scientificName && (
+        {props.scientificName ? (
           <>
             <div>
               <InfoHeader>PLANT POT</InfoHeader>
@@ -194,6 +212,12 @@ const ProductInfo: React.FC<PropInfo> = (props) => {
               <br />
             </div>
             <Tabs content={tabContent} />
+          </>
+        ) : (
+          <>
+            <InfoHeader>INCLUSIONS</InfoHeader>
+            <HorizontalLine />
+            <p>{props.inclusions}</p>
           </>
         )}
         <br />
@@ -256,13 +280,13 @@ const ProductInfo: React.FC<PropInfo> = (props) => {
             width="12rem"
             onClick={() => {
               setQuantity(1);
-              props.handleAddToCart(selectedColor, imageSrc, quantity);
+              props.handleAddToCart(imageSrc, quantity, selectedColor);
               window.alert(`${props.name} is added to your cart`);
             }}
           >{`Add to cart -  ${formatCurrency(quantity * props.price)}`}</Button>
         </CheckoutContainer>
       </InfoContainer>
-    </Container>
+    </ItemContainer>
   );
 };
 
