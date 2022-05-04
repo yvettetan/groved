@@ -1,8 +1,9 @@
 import { useState } from "react";
 import styled from "styled-components";
 import { Link } from "react-router-dom";
+import { useAppSelector } from "../hooks";
 
-const HeaderContainer = styled.div`
+const HeaderContainer = styled.header`
   margin: 0 auto;
   box-shadow: 0px 4px 40px 2px rgba(48, 26, 75, 0.1);
   position: fixed;
@@ -68,7 +69,9 @@ const NavLinks = styled.div`
   &.nav-menu li {
     list-style-type: none;
     margin: 0 1rem;
+    width: max-content;
   }
+
   &.nav-menu a {
     display: block;
     width: 100%;
@@ -108,13 +111,14 @@ const NavLinks = styled.div`
 
 const Header = () => {
   const [isNavExpanded, setIsNavExpanded] = useState(false);
-  const [accessDropdown, setAccessDropdown] = useState(false);
 
   const hideExpanded = () => {
     if (isNavExpanded) {
       setIsNavExpanded(false);
     }
   };
+
+  const cartQuantity = useAppSelector((state) => state.cart.cartQuantity);
 
   return (
     <HeaderContainer>
@@ -139,30 +143,15 @@ const Header = () => {
               <li>Plants</li>
             </Link>
             <Link to="/shop/garden-kits" onClick={hideExpanded}>
-              <li>Kits</li>
+              <li>Garden Kits</li>
             </Link>
-            <li
-              onClick={() => {
-                setAccessDropdown(!accessDropdown);
-              }}
+            <Link
+              to={"/cart"}
+              style={{ display: "flex", alignItems: "center" }}
+              onClick={hideExpanded}
             >
-              <img
-                className="icon"
-                src={"/assets/images/user.svg"}
-                alt="user"
-              />
-            </li>
-            <li
-              onClick={() => {
-                setAccessDropdown(!accessDropdown);
-              }}
-            >
-              <img
-                className="icon"
-                src={"/assets/images/shopping-cart.svg"}
-                alt="shopping-cart"
-              />
-            </li>
+              <li>Cart ({cartQuantity})</li>
+            </Link>
           </ul>
         </NavLinks>
       </Nav>
