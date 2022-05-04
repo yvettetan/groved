@@ -160,7 +160,7 @@ export interface GardenKitInfo {
 
 let gardenKits: GardenKitInfo[] = [
   {
-    id: 1,
+    id: 9,
     name: "potting supplies duo",
     description:
       'Our Potting Supplies Duo is all you need to pot your plants at home. Our all-natural mix gives your plant roots the preferred air, moisture and nutrition balance they need; while our lava rocks create a place for excess water to pool, away from your plant\'s roots. Organic Potting Mix bag is enough to pot 2–3 small plants (5" diam planters) or 1-2 medium plants (7" diam planters).',
@@ -170,7 +170,7 @@ let gardenKits: GardenKitInfo[] = [
     img: "/assets/images/kits/potting-supplies-duo.jpeg",
   },
   {
-    id: 2,
+    id: 10,
     name: "soil care kit",
     description:
       "Try our new Soil Care Kit to take your plant care to the next level. We've paired our exclusive Sill Plant Fertilizer with our 3-in-1 Moisture Meter (helps prevent over watering!) and a bag of our signature potting soil.",
@@ -180,7 +180,7 @@ let gardenKits: GardenKitInfo[] = [
     img: "/assets/images/kits/soil-care-kit.jpeg",
   },
   {
-    id: 3,
+    id: 11,
     name: "i dig you kit",
     description:
       "Our I Dig You Kit is the perfect birthday or “just because” gift for the fellow plant lovers in your life. The giftable bundle includes a heartleaf Philodendron, small Grant ceramic planter, bag of organic potting mix, bag of lava rocks, plant mister, and gardening gloves. It’s a fun way to let loved ones near and far know you’re thinking of them!",
@@ -194,3 +194,11 @@ let gardenKits: GardenKitInfo[] = [
 export function getGardenKits() {
   return gardenKits;
 }
+
+export const getGardenKit = (name: string) => {
+  return gardenKits.find((kit) => kit.name === name);
+};
+
+export const getItem = (name: string) => {
+  return [...plants, ...gardenKits].find((item) => item.name === name);
+};
