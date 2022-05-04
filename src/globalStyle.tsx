@@ -50,6 +50,13 @@ const GlobalStyle = createGlobalStyle<Props>`
     -moz-osx-font-smoothing: grayscale;
   }
 
+  #root {
+    height:100vh; 
+    margin:0;
+    display:flex; 
+    flex-direction:column; 
+  }
+
   h1, h2, h3 {
     font-family: ${(props) => props.theme.fontFamily.headline};
     text-transform: capitalize;
@@ -64,6 +71,12 @@ const GlobalStyle = createGlobalStyle<Props>`
     background-color: transparent;
     border: 0;
   }
-  `;
+  header, footer {
+    min-height: 50px;
+  }
+  footer {
+    margin-top:auto; 
+  }
+`;
 
 export default GlobalStyle;
