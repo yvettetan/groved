@@ -24,8 +24,8 @@ const NewsletterContainer = styled.section`
 
   input {
     padding: 1rem;
-    margin-right: 0.5rem;
-    width: 300px;
+    width: 90%;
+    margin: 0.5rem 0;
   }
 
   input.error {
@@ -38,6 +38,7 @@ const NewsletterContainer = styled.section`
 `;
 
 const Button = styled.button`
+  width: 100%;
   padding: 1rem 2rem;
   cursor: pointer;
   font-family: ${(props) => props.theme.fontFamily.default};
