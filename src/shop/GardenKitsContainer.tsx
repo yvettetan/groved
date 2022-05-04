@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import ItemCard from "../shared/ItemCard";
 import { getGardenKits } from "../data";
 import { Link } from "react-router-dom";
@@ -6,10 +6,6 @@ import Button from "../shared/Button";
 import "./ProductsContainer.scss";
 
 const ProductsContainer = () => {
-  // useEffect(() => {
-  //   console.log(location);
-  // }, [location]);
-
   let gardenKits = getGardenKits();
   return (
     <div className="products-container">
