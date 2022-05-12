@@ -108,16 +108,20 @@ const CartContainer = ({
       <h1>Shopping Cart ({cartQuantity})</h1>
 
       {cart.cartItems.map((item, key) => {
+        const category =
+          item.color !== undefined ? "shop/homebud-grove" : "shop/garden-kits";
         return (
           <div className="itemContainer">
-            <img
-              style={{
-                width: "70px",
-                height: "100px",
-              }}
-              src={item.image}
-              alt=""
-            />
+            <Link to={`/${category}/${item.name.replace(/\s/g, "-")}`}>
+              <img
+                style={{
+                  width: "70px",
+                  height: "100px",
+                }}
+                src={item.image}
+                alt=""
+              />
+            </Link>
             <div className="item-info-container">
               <div className="item-info">
                 <b style={{ textTransform: "capitalize" }}>{item.name}</b>
